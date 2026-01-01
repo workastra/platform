@@ -1,0 +1,38 @@
+services:
+  database:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: superadmin
+      POSTGRES_PASSWORD: password
+    volumes:
+      - database_data:/var/lib/postgresql/18/data
+      - ./.docker/database:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    restart: always
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://database/keycloak_db
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: keycloak_password
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: password
+    command: start-dev --import-realm
+    ports:
+      - 8000:8080
+    depends_on:
+      - database
+    networks:
+      - backend
+    volumes:
+      - ./.docker/keycloak/realm:/opt/keycloak/data/import
+
+networks:
+  backend:
+
+volumes:
+  database_data:
