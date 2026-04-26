@@ -1,0 +1,11 @@
+---
+spring:
+  main:
+    web-application-type: none
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flyway:
+    batch: true
+    validate-migration-naming: true
+    validate-on-migrate: true
