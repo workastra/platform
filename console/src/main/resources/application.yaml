@@ -1,7 +1,3 @@
-spring:
-  security:
-    user:
-      name: user
-      password: "{noop}password"
-      roles: USER
-    
+---
+server:
+  port: 8080

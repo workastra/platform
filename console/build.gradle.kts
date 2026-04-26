@@ -1,21 +1,23 @@
-plugins {
-	java
-	id("org.springframework.boot") 
-	id("io.spring.dependency-management")
-}
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(25)
-	}
+plugins {
+	id("org.springframework.boot")
+	id("io.spring.dependency-management")
+  id("org.graalvm.buildtools.native")
 }
 
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server")
-  testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-authorization-server-test")
+  implementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server")
+  implementation("org.springframework.boot:spring-boot-starter-webmvc")
+  testImplementation("org.springframework.boot:spring-boot-starter-security-oauth2-resource-server-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.named<BootJar>("bootJar") {
+  manifest.attributes["Implementation-Title"] = "Workastra Console"
 }
