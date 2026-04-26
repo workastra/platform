@@ -1,0 +1,7 @@
+pg_version = "18.0"
+
+excluded_rules = [
+    "require-timeout-settings",
+]
+
+assume_in_transaction = true
