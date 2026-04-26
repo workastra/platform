@@ -1,0 +1,12 @@
+---
+server:
+  port: 9000
+  forward-headers-strategy: framework
+
+spring:
+  main:
+    banner-mode: "off"
+
+  jpa:
+    hibernate:
+      ddl-auto: none
