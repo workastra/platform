@@ -1,0 +1,39 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Console",
+      "request": "launch",
+      "mainClass": "com.workastra.console.ConsoleApplication",
+      "projectName": "console"
+    },
+    {
+      "type": "java",
+      "name": "Migration",
+      "request": "launch",
+      "mainClass": "com.workastra.migration.MigrationApplication",
+      "projectName": "migration",
+      "env": {
+        "SPRING_DATASOURCE_URL": "jdbc:postgresql://localhost:5432/workastra_db?currentSchema=workastra",
+        "SPRING_DATASOURCE_USERNAME": "",
+        "SPRING_DATASOURCE_PASSWORD": ""
+      }
+    },
+    {
+      "type": "java",
+      "name": "IAM",
+      "request": "launch",
+      "mainClass": "com.workastra.iam.IAMApplication",
+      "projectName": "iam",
+      "env": {
+        "SPRING_DATASOURCE_URL": "jdbc:postgresql://localhost:5432/workastra_db?currentSchema=workastra",
+        "SPRING_DATASOURCE_USERNAME": "",
+        "SPRING_DATASOURCE_PASSWORD": ""
+      }
+    }
+  ]
+}

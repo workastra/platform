@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!DOCTYPE suppressions PUBLIC "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+  "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<!--
+  Centralized suppressions for Checkstyle. The list intentionally starts
+  small; extend it carefully to keep signal-to-noise high.
+-->
+<suppressions>
+  <!-- Ignore generated sources where style is tool-controlled. -->
+  <suppress files=".*/generated/.*" checks=".*" />
+
+  <!-- Allow broad experimentation in benchmarks or scratch space if added later. -->
+  <suppress files=".*/benchmark/.*" checks=".*" />
+</suppressions>

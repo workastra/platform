@@ -1,0 +1,245 @@
+<?xml version="1.0" ?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+  "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!--
+  Checkstyle configuration tuned for Spring Boot 4 projects running on Java 25.
+  The rules avoid layout-specific checks so that external formatters
+  remain the source of truth for whitespace and wrapping concerns.
+-->
+<module name="Checker">
+  <property name="charset" value="UTF-8" />
+  <property name="severity" value="error" />
+  <!-- Specifies which file extensions Checkstyle will process. -->
+  <!-- Docs: https://checkstyle.sourceforge.io/config.html -->
+  <property name="fileExtensions" value="java,xml,properties" />
+  <!-- Suppresses audit events for violations listed in a suppressions XML file. -->
+  <!-- Docs: https://checkstyle.sourceforge.io/config_filters.html#SuppressionFilter -->
+  <module name="SuppressionFilter">
+    <property name="file" value="${config_loc}/suppressions.xml" />
+  </module>
+  <!-- Suppresses checks in source regions marked by plain text comments. -->
+  <!-- Docs: https://checkstyle.sourceforge.io/config_filters.html#SuppressWithPlainTextCommentFilter -->
+  <module name="SuppressWithPlainTextCommentFilter">
+    <property name="offCommentFormat" value="CHECKSTYLE:OFF" />
+    <property name="onCommentFormat" value="CHECKSTYLE:ON" />
+    <property name="checkFormat" value=".*" />
+  </module>
+  <!-- Checks whether each file ends with a line separator. -->
+  <!-- Docs: https://checkstyle.sourceforge.io/config_misc.html#NewlineAtEndOfFile -->
+  <module name="NewlineAtEndOfFile">
+    <property name="lineSeparator" value="lf" />
+  </module>
+  <!-- Checks that there are no tab characters in the file. -->
+  <!-- Docs: https://checkstyle.sourceforge.io/config_whitespace.html#FileTabCharacter -->
+  <module name="FileTabCharacter">
+    <property name="eachLine" value="true" />
+  </module>
+  <module name="TreeWalker">
+    <!-- Checks that the source file name matches the name of the outer type. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/misc/outertypefilename.html -->
+    <module name="OuterTypeFilename" />
+    <!-- Checks that a package declaration is present. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/packagedeclaration.html -->
+    <module name="PackageDeclaration" />
+    <!-- Checks that type names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/typename.html -->
+    <module name="TypeName" />
+    <!-- Checks that field names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/membername.html -->
+    <module name="MemberName" />
+    <!-- Checks that parameter names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/parametername.html -->
+    <module name="ParameterName" />
+    <!-- Checks that local variable names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/localvariablename.html -->
+    <module name="LocalVariableName" />
+    <!-- Checks that pattern variable names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/patternvariablename.html -->
+    <module name="PatternVariableName" />
+    <!-- Checks that catch parameter names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/catchparametername.html -->
+    <module name="CatchParameterName" />
+    <!-- Checks that record component names match a specified pattern. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/naming/recordcomponentname.html -->
+    <module name="RecordComponentName" />
+    <!-- Controls imports from packages and classes that you want to forbid. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/imports/illegalimport.html -->
+    <module name="IllegalImport">
+      <property name="illegalPkgs" value="sun,com.sun" />
+    </module>
+    <!-- Checks that wildcard imports are not used. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/imports/avoidstarimport.html -->
+    <module name="AvoidStarImport" />
+    <!-- Checks that static wildcard imports are not used. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/imports/avoidstaticimport.html -->
+    <module name="AvoidStaticImport">
+      <property name="excludes" value="org.assertj.core.api.Assertions.*" />
+    </module>
+    <!-- Checks for import statements that are never used. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/imports/unusedimports.html -->
+    <module name="UnusedImports" />
+    <!-- Checks for import statements that are redundant. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/imports/redundantimport.html -->
+    <module name="RedundantImport" />
+    <!-- Checks that each file has only one top level type. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/design/onetoplevelclass.html -->
+    <module name="OneTopLevelClass" />
+    <!-- Checks visibility modifiers of class members. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/design/visibilitymodifier.html -->
+    <module name="VisibilityModifier">
+      <property name="allowPublicImmutableFields" value="true" />
+    </module>
+    <!-- Checks that classes which can be declared final are declared final. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/design/finalclass.html -->
+    <module name="FinalClass" />
+    <!-- Makes sure utility classes do not have a public constructor. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/design/hideutilityclassconstructor.html -->
+    <module name="HideUtilityClassConstructor" />
+    <!-- Checks that modifiers are in the order suggested by the Java Language Specification. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/modifier/modifierorder.html -->
+    <module name="ModifierOrder" />
+    <!-- Checks for modifiers that are redundant. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/modifier/redundantmodifier.html -->
+    <module name="RedundantModifier" />
+    <!-- Verifies that @Override is present when it should be. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/annotation/missingoverride.html -->
+    <module name="MissingOverride" />
+    <!-- Checks that control statements use braces. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/blocks/needbraces.html -->
+    <module name="NeedBraces">
+      <property name="allowSingleLineStatement" value="false" />
+    </module>
+    <!-- Checks for empty blocks. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/blocks/emptyblock.html -->
+    <module name="EmptyBlock">
+      <property name="option" value="TEXT" />
+      <property
+        name="tokens"
+        value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR"
+      />
+    </module>
+    <!-- Restricts throws clauses to exception types you configure as illegal. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/illegalthrows.html -->
+    <module name="IllegalThrows" />
+    <!-- Checks for boolean expressions that are more complicated than they need to be. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/simplifybooleanexpression.html -->
+    <module name="SimplifyBooleanExpression" />
+    <!-- Checks for boolean return statements that can be simplified. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/simplifybooleanreturn.html -->
+    <module name="SimplifyBooleanReturn" />
+    <!-- Disallows instantiation of classes you configure as illegal. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/illegalinstantiation.html -->
+    <module name="IllegalInstantiation" />
+    <!-- Checks that each variable declaration appears in its own statement. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/multiplevariabledeclarations.html -->
+    <module name="MultipleVariableDeclarations" />
+    <!-- Checks that the default clause comes after all case clauses in a switch. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/defaultcomeslast.html -->
+    <module name="DefaultComesLast" />
+    <!-- Checks that there are no finalize methods. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html -->
+    <module name="NoFinalizer" />
+    <!-- Checks that switch statements have a default case. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/missingswitchdefault.html -->
+    <module name="MissingSwitchDefault" />
+    <!-- Ensures that classes overriding equals() also override hashCode(). -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/equalshashcode.html -->
+    <module name="EqualsHashCode" />
+    <!-- Filter SuppressionXpathFilter only supports a single suppression per module instance. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/filters/suppressionxpathsinglefilter.html -->
+    <module name="SuppressionXpathSingleFilter">
+      <property name="files" value="\.java$" />
+      <property name="checks" value="HideUtilityClassConstructor" />
+      <property name="query" value="//CLASS_DEF[.//ANNOTATION/IDENT[@text='SpringBootApplication']]" />
+    </module>
+    <!-- Reports violations for AST nodes that match a supplied XPath query. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/matchxpath.html -->
+    <module name="MatchXpath">
+      <property
+        name="query"
+        value="//METHOD_DEF[
+              MODIFIERS/ANNOTATION/IDENT[@text='Bean']
+              and MODIFIERS/*[not(self::ANNOTATION)]
+            ]"
+      />
+      <message
+        key="matchxpath.match"
+        value="@Bean methods must not declare any modifier keyword (package-private only)."
+      />
+    </module>
+    <!-- Checks that references to instance fields and methods use 'this' when required. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/requirethis.html -->
+    <module name="RequireThis">
+      <property name="validateOnlyOverlapping" value="false" />
+    </module>
+    <!-- Checks the location of annotations. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html -->
+    <module name="AnnotationLocation" />
+    <!-- Checks the style of array type declarations. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/misc/arraytypestyle.html -->
+    <module name="ArrayTypeStyle" />
+    <!-- Checks that overloaded methods are declared together. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/overloadmethodsdeclorder.html -->
+    <module name="OverloadMethodsDeclarationOrder" />
+    <!-- Disallows assignment to parameters. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/parameterassignment.html -->
+    <module name="ParameterAssignment" />
+    <!-- Checks that pattern variables are not assigned. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/patternvariableassignment.html -->
+    <module name="PatternVariableAssignment" />
+    <!-- Checks for unnecessary null checks before instanceof. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessarynullcheckwithinstanceof.html -->
+    <module name="UnnecessaryNullCheckWithInstanceOf" />
+    <!-- Checks for parentheses that are unnecessary. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessaryparentheses.html -->
+    <module name="UnnecessaryParentheses" />
+    <!-- Checks for an unnecessary semicolon after a type declaration. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonafteroutertypedeclaration.html -->
+    <module name="UnnecessarySemicolonAfterOuterTypeDeclaration" />
+    <!-- Checks for an unnecessary semicolon after a type member declaration. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonaftertypememberdeclaration.html -->
+    <module name="UnnecessarySemicolonAfterTypeMemberDeclaration" />
+    <!-- Checks for an unnecessary semicolon in enum declarations. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicoloninenumeration.html -->
+    <module name="UnnecessarySemicolonInEnumeration" />
+    <!-- Checks for an unnecessary semicolon in try-with-resources. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonintrywithresources.html -->
+    <module name="UnnecessarySemicolonInTryWithResources" />
+    <!-- Checks that unused catch parameters are unnamed. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unusedcatchparametershouldbeunnamed.html -->
+    <module name="UnusedCatchParameterShouldBeUnnamed" />
+    <!-- Checks that unused lambda parameters are unnamed. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unusedlambdaparametershouldbeunnamed.html -->
+    <module name="UnusedLambdaParameterShouldBeUnnamed" />
+    <!-- Checks that a local variable is declared or assigned but never used. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html -->
+    <module name="UnusedLocalVariable" />
+    <!-- Checks the distance between a variable declaration and its first use. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/variabledeclarationusagedistance.html -->
+    <module name="VariableDeclarationUsageDistance" />
+    <!-- Ensures that a when expression is used instead of a single if inside a case block. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/whenshouldbeused.html -->
+    <module name="WhenShouldBeUsed" />
+    <!-- Checks that string literals are not compared using == or !=. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/stringliteralequality.html -->
+    <module name="StringLiteralEquality" />
+    <!-- Checks that class or interface members appear in the recommended declaration order. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/declarationorder.html -->
+    <module name="DeclarationOrder" />
+    <!-- Checks for empty statements. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/emptystatement.html -->
+    <module name="EmptyStatement" />
+    <!-- Checks that String literals are placed on the left side of equals comparisons. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/equalsavoidnull.html -->
+    <module name="EqualsAvoidNull" />
+    <!-- Checks for variables and fields explicitly initialized to their default value. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/explicitinitialization.html -->
+    <module name="ExplicitInitialization" />
+    <!-- Restricts how deeply if statements may be nested. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/nestedifdepth.html -->
+    <module name="NestedIfDepth" />
+    <!-- Finds switch case groups that fall through to the next case without a clear signal. -->
+    <!-- Docs: https://checkstyle.sourceforge.io/checks/coding/fallthrough.html -->
+    <module name="FallThrough" />
+  </module>
+</module>
