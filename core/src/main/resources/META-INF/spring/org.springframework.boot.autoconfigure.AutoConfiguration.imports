@@ -1,0 +1,2 @@
+com.workastra.core.infrastructure.JdbcLockConfiguration
+com.workastra.core.infrastructure.PasswordEncoderConfiguration
