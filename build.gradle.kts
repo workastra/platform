@@ -6,7 +6,7 @@ plugins {
 	id("org.springframework.boot") version "4.0.5" apply false
 	id("io.spring.dependency-management") version "1.1.7" apply false
   id("org.graalvm.buildtools.native") version "0.11.4" apply false
-  id("com.diffplug.spotless") version "8.1.0"
+  id("com.diffplug.spotless") version "8.4.0"
   id("net.ltgt.errorprone") version "5.1.0"
   id("io.freefair.lombok") version "9.2.0"
 }
