@@ -132,7 +132,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ matrix.module }}
 
       - name: Build native image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ./${{ matrix.module }}/Dockerfile
