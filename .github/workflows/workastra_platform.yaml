@@ -13,7 +13,8 @@ on:
       - gradlew*
       - settings.gradle*
   push:
-    branches: [main]
+    branches:
+      - v0
     paths:
       - gradle/**
       - console/**
