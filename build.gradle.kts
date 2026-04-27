@@ -8,7 +8,7 @@ plugins {
   id("org.graalvm.buildtools.native") version "0.11.4" apply false
   id("com.diffplug.spotless") version "8.1.0"
   id("net.ltgt.errorprone") version "5.1.0"
-  id("io.freefair.lombok") version "9.2.0"
+  id("io.freefair.lombok") version "9.4.0"
 }
 
 allprojects {
