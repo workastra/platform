@@ -1,12 +1,12 @@
-package com.workastra.console;
+package com.workastra.iam;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConsoleApplication {
+public class IAMApplication {
 
     static void main(String[] args) {
-        SpringApplication.run(ConsoleApplication.class, args);
+        SpringApplication.run(IAMApplication.class, args);
     }
 }

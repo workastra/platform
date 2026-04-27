@@ -1,0 +1,93 @@
+---
+name: Linter & Formatter
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  prettier:
+    name: Prettier Formatter
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 25.9.0
+      - name: Init local project
+        run: npm init -y
+      - name: Install deps
+        run: |
+          npm install --save-dev prettier@3.8.3 @prettier/plugin-xml@3.4.2 prettier-plugin-java@2.8.1
+      - name: Run Prettier
+        run: |
+          npx prettier \
+            --config .prettierrc.yaml \
+            --write .
+      - id: verify_format
+        name: Verify no changes after formatting
+        run: |
+          changed_files="$(git diff --name-only)"
+
+          if [[ -z "$changed_files" ]]; then
+            echo "Code is properly formatted."
+            exit 0
+          fi
+
+          cat <<EOF
+          Code is not formatted properly. Please run Prettier locally and commit the changes.
+
+          Changed files:
+          $changed_files
+          EOF
+
+          printf 'changed_files<<EOF\n%s\nEOF\n' "$changed_files" >> "$GITHUB_OUTPUT"
+          exit 1
+      - if: failure()
+        name: Upload formatter results
+        uses: actions/upload-artifact@v7
+        with:
+          name: prettier-results
+          include-hidden-files: true
+          path: ${{ steps.verify_format.outputs.changed_files }}
+          retention-days: 1
+
+  yaml-linter:
+    name: YAML Linter
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install yamllint==1.38.0
+      - run: yamllint -c .yamllint.yaml --format github --strict .
+
+  sqruff:
+    name: Lint with sqruff
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: pip install sqruff==0.38.0
+      - name: Run sqruff lint
+        run: sqruff lint --format json . > ${{ runner.temp }}/sqruff-raw.json
+      - name: Convert sqruff JSON to SARIF
+        if: always()
+        run: python .github/scripts/sqruff_to_sarif.py
+      - if: always()
+        name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: ${{ runner.temp }}/sqruff.sarif
+          category: sqruff

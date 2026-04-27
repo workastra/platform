@@ -1,0 +1,109 @@
+---
+version: "1.0"
+linter: qodana-jvm-community
+projectJDK: "25"
+profile:
+  name: qodana.recommended
+failThreshold: 0
+include:
+  - name: RedundantSuppression
+  - name: TodoComment
+  - name: IncorrectPluginDslStructure
+  - name: DeprecatedConfigurations
+  - name: MissortedModifiers
+  - name: UnnecessaryConstantArrayCreationExpression
+  - name: RedundantFieldInitialization
+  - name: UnnecessaryConstructor
+  - name: UnnecessaryFullyQualifiedName
+  - name: BreakStatement
+  - name: BreakStatementWithLabel
+  - name: ContinueStatement
+  - name: ContinueStatementWithLabel
+  - name: ConfusingElse
+  - name: RedundantThrows
+  - name: RedundantLambdaParameterType
+  - name: ErrorRethrown
+  - name: ClassWithMultipleLoggers
+  - name: NonStaticFinalLogger
+  - name: AssertStatement
+  - name: MissingDeprecatedAnnotation
+  - name: MissingPackageInfo
+  - name: UnnecessaryInheritDoc
+  - name: UnnecessaryJavaDocLink
+  - name: CastCanBeReplacedWithVariable
+  - name: ReturnNull
+  - name: MisspelledEquals
+  - name: EqualsAndHashcode
+  - name: SerializableHasSerialVersionUIDField
+  - name: Since15
+  - name: CanBeFinal
+  - name: UnusedReturnValue
+  # - name: unused
+  - name: UnusedLibrary
+  - name: UseOfObsoleteDateTimeApi
+  - name: ObsoleteCollection
+  - name: SystemOutErr
+  - name: AssignmentToForLoopParameter
+  - name: AssignmentToLambdaParameter
+  - name: AssignmentToMethodParameter
+  - name: AssignmentToStaticFieldFromInstanceMethod
+  - name: AssignmentToSuperclassField
+  - name: NestedAssignment
+  - name: IncrementDecrementUsedAsExpression
+  - name: ReplaceAssignmentWithOperatorAssignment
+  - name: AssignmentToNull
+  - name: NegatedEqualityExpression
+  - name: NegatedConditionalExpression
+  - name: ExpressionMayBeFactorized
+  - name: RedundantModifiersUtilityClassLombok
+  - name: ArrayLengthInLoopCondition
+  # - name: ClassHasNoToStringMethod
+  - name: FieldNotUsedInToString
+  - name: IgnoreFileDuplicateEntry
+  - name: ClassNameDiffersFromFileName
+  - name: ClassWithOnlyPrivateConstructors
+  - name: ConfigurationAvoidance
+  - name: DependencyNotationArgument
+  - name: BintrayPublishingPlugin
+  - name: JCenterRepository
+  - name: MultipleRepositoryUrls
+  - name: ForeignDelegate
+  # - name: ProblematicWhitespace
+  # - name: LongLine
+  - name: QodanaJavaSanity
+  # - name: InconsistentLineSeparators
+  - name: EmptyDirectory
+  - name: JvmLinesOfCodeInspection
+  - name: CyclomaticComplexityInspection
+  - name: MissingOverrideAnnotation
+  - name: MarkdownDocumentationCommentsMigration
+  - name: SequencedCollectionMethodCanBeUsed
+  - name: StringTemplateMigration
+  - name: PatternVariableCanBeUsed
+  - name: ClassCanBeRecord
+  - name: EnhancedSwitchMigration
+  - name: Java9CollectionFactory
+  - name: IfCanBeSwitch
+  - name: EnumerationCanBeIteration
+  - name: UseCompareMethod
+  - name: ReplaceNullCheck
+  - name: Java8MapApi
+  - name: CodeBlock2Expr
+  - name: UseHashCodeMethodInspection
+  - name: FoldExpressionIntoStream
+  - name: Java8ListSort
+  - name: Convert2Diamond
+  - name: TryWithIdenticalCatches
+  - name: UnnecessaryBoxing
+  - name: UnnecessaryUnboxing
+  - name: CollectionsFieldAccessReplaceableByMethodCall
+  - name: WhileCanBeForeach
+  - name: IndexOfReplaceableByContains
+  - name: BigDecimalLegacyMethod
+  - name: BigDecimalLegacyMethod
+  - name: ForCanBeForeach
+  - name: RawUseOfParameterizedType
+  - name: ZeroLengthArrayInitialization
+  - name: UpperCaseFieldNameNotConstant
+  - name: LocalVariableNamingConvention
+  - name: DollarSignInName

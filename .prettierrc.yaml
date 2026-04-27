@@ -1,0 +1,30 @@
+---
+printWidth: 120
+tabWidth: 2
+useTabs: false
+semi: true
+singleQuote: false
+quoteProps: as-needed
+jsxSingleQuote: false
+trailingComma: all
+bracketSpacing: true
+objectWrap: collapse
+bracketSameLine: false
+arrowParens: always
+endOfLine: lf
+
+overrides:
+  - files: "*.java"
+    options:
+      plugins:
+        - prettier-plugin-java
+      tabWidth: 4
+      arrowParens: avoid
+  - files: "*.xml"
+    options:
+      plugins:
+        - "@prettier/plugin-xml"
+      bracketSameLine: false
+      xmlQuoteAttributes: double
+      xmlWhitespaceSensitivity: ignore
+      singleAttributePerLine: false

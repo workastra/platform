@@ -1,13 +1,62 @@
+import net.ltgt.gradle.errorprone.errorprone
+
 plugins {
-	id("org.springframework.boot") version "4.0.1" apply false
+  java
+  checkstyle
+	id("org.springframework.boot") version "4.0.3" apply false
 	id("io.spring.dependency-management") version "1.1.7" apply false
+  id("org.graalvm.buildtools.native") version "0.11.4" apply false
+  id("com.diffplug.spotless") version "8.1.0"
+  id("net.ltgt.errorprone") version "5.1.0"
+  id("io.freefair.lombok") version "9.2.0"
+}
+
+allprojects {
+  group = "com.workastra"
+  version = "0.0.1-SNAPSHOT"
+
+  repositories {
+    mavenCentral()
+  }
 }
 
 subprojects {
-	group = "com.workastra"
-	version = "0.0.1-SNAPSHOT"
+  apply(plugin = "java")
+  apply(plugin = "checkstyle")
+  apply(plugin = "com.diffplug.spotless")
+  apply(plugin = "net.ltgt.errorprone")
+  apply(plugin = "io.freefair.lombok")
 
-	repositories {
-		mavenCentral()
-	}
+  java {
+    toolchain {
+      languageVersion.set(JavaLanguageVersion.of(25))
+    }
+  }
+
+  dependencies {
+    errorprone("com.uber.nullaway:nullaway:0.13.3")
+    errorprone("com.google.errorprone:error_prone_core:2.49.0")
+  }
+
+  checkstyle {
+    toolVersion = "13.4.0"
+  }
+
+  spotless {
+    java {
+      target("src/*/java/**/*.java")
+    }
+  }
+
+  tasks.withType<JavaCompile>().configureEach {
+    options.errorprone {
+      excludedPaths = ".*/build/generated/.*"
+
+      errorproneArgs.addAll(listOf(
+        "-Xep:NullAway:ERROR",
+        "-XepOpt:NullAway:JSpecifyMode=true",
+        "-XepOpt:NullAway:AnnotatedPackages=com.workastra",
+      ))
+    }
+  }
 }
