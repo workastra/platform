@@ -3,27 +3,9 @@ name: Workastra Platform
 
 on:
   pull_request:
-    paths:
-      - gradle/**
-      - console/**
-      - iam/**
-      - migration/**
-      - build.gradle*
-      - gradle.properties
-      - gradlew*
-      - settings.gradle*
   push:
     branches:
       - v0
-    paths:
-      - gradle/**
-      - console/**
-      - iam/**
-      - migration/**
-      - build.gradle*
-      - gradle.properties
-      - gradlew*
-      - settings.gradle*
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref_name }}
@@ -39,20 +21,18 @@ jobs:
     name: Qodana Scan
     runs-on: ubuntu-24.04
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
+      pull-requests: read
       checks: write
+      actions: read
+      security-events: write
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - uses: JetBrains/qodana-action@v2025.3.2
         with:
           pr-mode: false
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-          QODANA_ENDPOINT: https://qodana.cloud
       - if: always()
         uses: github/codeql-action/upload-sarif@v4
         with:

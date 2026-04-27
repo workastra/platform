@@ -29,7 +29,7 @@ public class AuthorizationServerConfiguration {
     SecurityFilterChain authorizationServerSecurityFilterChain(
         HttpSecurity http,
         Function<OidcUserInfoAuthenticationContext, OidcUserInfo> userInfoMapper
-    ) throws Exception {
+    ) {
         http
             .oauth2AuthorizationServer(authorizationServer -> {
                 http.securityMatcher(authorizationServer.getEndpointsMatcher());
@@ -52,7 +52,7 @@ public class AuthorizationServerConfiguration {
 
     @Bean
     @Order(2)
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
         http
             .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
             // Enable form login with default settings
