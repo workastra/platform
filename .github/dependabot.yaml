@@ -4,4 +4,33 @@ updates:
   - package-ecosystem: gradle
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
+      # yamllint disable rule:quoted-strings
+      time: "00:00"
+      # yamllint enable rule:quoted-strings
+      timezone: Asia/Ho_Chi_Minh
+    labels:
+      - "type: chore"
+      - "priority: low"
+      - "pr: size S"
+      - "status: needs triage"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 50
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+      # yamllint disable rule:quoted-strings
+      time: "00:00"
+      # yamllint enable rule:quoted-strings
+      timezone: Asia/Ho_Chi_Minh
+    labels:
+      - "type: chore"
+      - "priority: low"
+      - "pr: size S"
+      - "status: needs triage"
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 50
