@@ -77,6 +77,10 @@ jobs:
   sqruff:
     name: Lint with sqruff
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
     steps:
       - uses: actions/checkout@v5
       - run: pip install sqruff==0.38.0
