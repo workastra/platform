@@ -27,7 +27,7 @@ jobs:
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: JetBrains/qodana-action@v2025.3.2
@@ -49,7 +49,7 @@ jobs:
       matrix:
         module: [console, iam, migration]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up GraalVM
         uses: actions/setup-java@v5
@@ -71,7 +71,7 @@ jobs:
       matrix:
         module: [console, iam, migration]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up GraalVM
         uses: actions/setup-java@v5
@@ -94,7 +94,7 @@ jobs:
       matrix:
         module: [console, iam, migration]
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Set up GraalVM
         uses: actions/setup-java@v5
