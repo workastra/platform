@@ -3,7 +3,7 @@ import net.ltgt.gradle.errorprone.errorprone
 plugins {
   java
   checkstyle
-	id("org.springframework.boot") version "4.0.5" apply false
+	id("org.springframework.boot") version "4.0.6" apply false
 	id("io.spring.dependency-management") version "1.1.7" apply false
   id("org.graalvm.buildtools.native") version "0.11.4" apply false
   id("com.diffplug.spotless") version "8.4.0"
