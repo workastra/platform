@@ -1,4 +1,4 @@
-package com.workastra.core.infrastructure;
+package com.workastra.core.module.security.configuration;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

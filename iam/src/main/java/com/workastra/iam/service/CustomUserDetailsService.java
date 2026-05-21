@@ -1,6 +1,6 @@
 package com.workastra.iam.service;
 
-import com.workastra.iam.repository.UserRepository;
+import com.workastra.core.module.security.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = this.userRepository.findByUsername(username);
+        var user = this.userRepository.findByUsernameAndDeletedAtIsNull(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("Cannot find any user with the given username");

@@ -1,6 +1,6 @@
 package com.workastra.iam.configuration;
 
-import com.workastra.iam.entity.User;
+import com.workastra.core.module.security.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
