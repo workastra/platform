@@ -119,7 +119,7 @@ public class User implements UserDetails, CredentialsContainer {
     private Instant createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by", insertable = true, updatable = false)
+    @JoinColumn(name = "created_by", updatable = false)
     @CreatedBy
     private User createdBy;
 
@@ -128,7 +128,7 @@ public class User implements UserDetails, CredentialsContainer {
     private Instant updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "updated_by", insertable = true, updatable = true)
+    @JoinColumn(name = "updated_by")
     @LastModifiedBy
     private User updatedBy;
 
@@ -136,7 +136,7 @@ public class User implements UserDetails, CredentialsContainer {
     private @Nullable Instant deletedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "deleted_by", insertable = true, updatable = true)
+    @JoinColumn(name = "deleted_by")
     private @Nullable User deletedBy;
 
     @Override
