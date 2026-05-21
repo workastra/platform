@@ -1,9 +1,9 @@
 ---
 version: "1.0"
 linter: qodana-jvm-community
-projectJDK: "25"
 profile:
   name: qodana.recommended
+projectJDK: "26"
 failThreshold: 0
 include:
   - name: RedundantSuppression
