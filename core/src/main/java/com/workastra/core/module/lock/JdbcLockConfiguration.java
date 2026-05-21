@@ -1,4 +1,4 @@
-package com.workastra.core.infrastructure;
+package com.workastra.core.module.lock;
 
 import javax.sql.DataSource;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

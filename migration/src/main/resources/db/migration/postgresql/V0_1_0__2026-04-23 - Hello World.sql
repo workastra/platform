@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Function: handle_timestamps()
 --
 -- Description:
@@ -78,12 +80,12 @@ CREATE TABLE IF NOT EXISTS oauth2_registered_client (
 
 -- users
 CREATE TABLE IF NOT EXISTS users (
-    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    id UUID CONSTRAINT pk_user_id PRIMARY KEY DEFAULT uuidv7(),
     username TEXT CHECK (char_length(username) <= 255) NOT NULL CONSTRAINT uk_username UNIQUE,
     password TEXT CHECK (char_length(password) <= 200),
     family_name TEXT CHECK (char_length(family_name) <= 64),
     middle_name TEXT CHECK (char_length(middle_name) <= 64),
-    given_name TEXT CHECK (char_length(given_name) <= 64) NOT NULL,
+    given_name TEXT CHECK (char_length(given_name) <= 64),
     gender TEXT CHECK (gender IN ('male', 'female', 'other')) NOT NULL DEFAULT 'other',
     email TEXT CHECK (char_length(email) <= 255) NOT NULL,
     email_verified BOOLEAN NOT NULL DEFAULT FALSE,
@@ -95,9 +97,11 @@ CREATE TABLE IF NOT EXISTS users (
     credentials_non_expired BOOLEAN NOT NULL DEFAULT TRUE,
     enabled BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMPTZ NOT NULL,
-    created_by TEXT CHECK (char_length(created_by) <= 255) NOT NULL,
+    created_by UUID NOT NULL CONSTRAINT fk_created_by REFERENCES users (id) ON DELETE RESTRICT,
     updated_at TIMESTAMPTZ NOT NULL,
-    updated_by TEXT CHECK (char_length(updated_by) <= 255) NOT NULL
+    updated_by UUID NOT NULL CONSTRAINT fk_updated_by REFERENCES users (id) ON DELETE RESTRICT,
+    deleted_at TIMESTAMPTZ,
+    deleted_by UUID CONSTRAINT fk_deleted_by REFERENCES users (id) ON DELETE RESTRICT
 );
 
 CREATE TRIGGER trg_users_handle_timestamps_insert
@@ -114,25 +118,22 @@ WHEN (old IS DISTINCT FROM new)
 EXECUTE FUNCTION handle_timestamps();
 
 CREATE TABLE IF NOT EXISTS authorities (
-    id UUID PRIMARY KEY DEFAULT uuidv7(),
+    id UUID CONSTRAINT pk_authority_id PRIMARY KEY DEFAULT uuidv7(),
     name TEXT CHECK (char_length(name) <= 100) NOT NULL CONSTRAINT uk_name UNIQUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-    created_by TEXT CHECK (char_length(created_by) <= 255) NOT NULL,
+    created_by UUID NOT NULL CONSTRAINT fk_created_by REFERENCES users (id) ON DELETE RESTRICT,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT current_timestamp,
-    updated_by TEXT CHECK (char_length(updated_by) <= 255) NOT NULL
+    updated_by UUID NOT NULL CONSTRAINT fk_updated_by REFERENCES users (id) ON DELETE RESTRICT,
+    deleted_at TIMESTAMPTZ,
+    deleted_by UUID CONSTRAINT fk_deleted_by REFERENCES users (id) ON DELETE RESTRICT
 );
 
 CREATE TABLE IF NOT EXISTS user_authorities (
-    user_id UUID NOT NULL,
-    authority_id UUID NOT NULL,
-
-    CONSTRAINT fk_user
-    FOREIGN KEY (user_id)
-    REFERENCES users (id) ON DELETE CASCADE,
-
-    CONSTRAINT fk_authority
-    FOREIGN KEY (authority_id)
-    REFERENCES authorities (id) ON DELETE CASCADE,
+    user_id UUID NOT NULL CONSTRAINT fk_user_id REFERENCES users (id) ON DELETE RESTRICT,
+    authority_id UUID NOT NULL CONSTRAINT fk_authority_id REFERENCES authorities (id) ON DELETE RESTRICT,
 
     CONSTRAINT pk_user_authorities PRIMARY KEY (user_id, authority_id)
 );
+
+INSERT INTO users (id, username, password, email, created_by, updated_by)
+VALUES ('00000000-0000-7000-8000-000000000000', 'system', NULL, 'system@internal.com', '00000000-0000-7000-8000-000000000000', '00000000-0000-7000-8000-000000000000');

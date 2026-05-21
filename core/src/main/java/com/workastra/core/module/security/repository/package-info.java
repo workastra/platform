@@ -1,4 +1,4 @@
 @NullMarked
-package com.workastra.iam.entity;
+package com.workastra.core.module.security.repository;
 
 import org.jspecify.annotations.NullMarked;

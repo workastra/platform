@@ -1,7 +1,7 @@
 package com.workastra.iam.configuration;
 
-import com.workastra.iam.entity.User;
-import com.workastra.iam.repository.UserRepository;
+import com.workastra.core.module.security.model.User;
+import com.workastra.core.module.security.repository.UserRepository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -50,6 +50,10 @@ class UserInfoMapper implements Function<OidcUserInfoAuthenticationContext, Oidc
         customClaims.put(StandardClaimNames.EMAIL_VERIFIED, user.isEmailVerified());
         customClaims.put(StandardClaimNames.NAME, user.getFullName());
 
+        if (user.getGivenName() != null) {
+            customClaims.put(StandardClaimNames.GIVEN_NAME, user.getGivenName());
+        }
+
         if (user.getFamilyName() != null) {
             customClaims.put(StandardClaimNames.FAMILY_NAME, user.getFamilyName());
         }
@@ -58,7 +62,6 @@ class UserInfoMapper implements Function<OidcUserInfoAuthenticationContext, Oidc
             customClaims.put(StandardClaimNames.MIDDLE_NAME, user.getMiddleName());
         }
 
-        customClaims.put(StandardClaimNames.GIVEN_NAME, user.getGivenName());
         customClaims.put(StandardClaimNames.LOCALE, user.getLocale().toLanguageTag());
         customClaims.put(StandardClaimNames.ZONEINFO, user.getTimezoneId().getId());
         customClaims.put(StandardClaimNames.UPDATED_AT, user.getUpdatedAt().getEpochSecond());
