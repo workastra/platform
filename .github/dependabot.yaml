@@ -15,7 +15,7 @@ updates:
       - "pr: size S"
       - "status: needs triage"
     cooldown:
-      default-days: 7
+      default-days: 2
     open-pull-requests-limit: 50
 
   - package-ecosystem: github-actions
@@ -32,5 +32,5 @@ updates:
       - "pr: size S"
       - "status: needs triage"
     cooldown:
-      default-days: 7
+      default-days: 2
     open-pull-requests-limit: 50
