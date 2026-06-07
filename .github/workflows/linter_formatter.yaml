@@ -20,7 +20,7 @@ jobs:
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: actions/setup-node@v6
         with:
           node-version: 25.9.0
@@ -70,7 +70,7 @@ jobs:
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - run: pip install yamllint==1.38.0
       - run: yamllint -c .yamllint.yaml --format github --strict .
 
@@ -82,7 +82,7 @@ jobs:
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - run: pip install sqruff==0.38.0
       - name: Run sqruff lint
         run: sqruff lint --format json . > ${{ runner.temp }}/sqruff-raw.json
