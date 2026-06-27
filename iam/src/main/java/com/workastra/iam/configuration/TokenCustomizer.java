@@ -12,10 +12,10 @@ class TokenCustomizer implements OAuth2TokenCustomizer<JwtEncodingContext> {
 
     @Override
     public void customize(JwtEncodingContext context) {
-        Authentication principal = context.getPrincipal();
+        Authentication authentication = context.getPrincipal();
         JwtClaimsSet.Builder claims = context.getClaims();
 
-        if (principal.getPrincipal() instanceof User userDetails) {
+        if (authentication != null && authentication.getPrincipal() instanceof User userDetails) {
             // Override the default "sub" claim with the user's ID instead of username, which is more stable and less likely to change.
             claims.subject(userDetails.getId().toString());
         }
