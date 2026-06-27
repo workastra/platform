@@ -62,9 +62,18 @@ public class OAuthClientBootstrap implements ApplicationRunner {
     private RegisteredClient toRegisteredClient(String id, OAuth2AuthorizationServerProperties.Client client) {
         var registration = client.getRegistration();
 
+        String clientId = registration.getClientId();
+        String clientName = registration.getClientName();
+
+        if (clientId == null || clientName == null) {
+            throw new IllegalArgumentException(
+                String.format("Client with id: %s must have a clientId and clientName", id)
+            );
+        }
+
         return RegisteredClient.withId(id)
-            .clientName(registration.getClientName())
-            .clientId(registration.getClientId())
+            .clientName(clientName)
+            .clientId(clientId)
             .clientSecret(
                 registration.getClientSecret() == null
                     ? ""
