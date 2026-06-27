@@ -38,7 +38,7 @@ subprojects {
   }
 
   checkstyle {
-    toolVersion = "13.4.0"
+    toolVersion = "13.6.0"
   }
 
   spotless {
