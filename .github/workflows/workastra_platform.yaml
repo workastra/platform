@@ -27,7 +27,7 @@ jobs:
       actions: read
       security-events: write
     steps:
-      - uses: actions/checkout@v7.0.0
+      - uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 0
       - uses: JetBrains/qodana-action@v2026.1.3
@@ -45,7 +45,7 @@ jobs:
       matrix:
         module: [console, iam, migration]
     steps:
-      - uses: actions/checkout@v7.0.0
+      - uses: actions/checkout@v7.0.1
 
       - name: Set up JAVA
         uses: actions/setup-java@v5
