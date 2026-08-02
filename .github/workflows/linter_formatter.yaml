@@ -91,7 +91,7 @@ jobs:
         run: python .github/scripts/sqruff_to_sarif.py
       - if: always()
         name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v4.36.1
+        uses: github/codeql-action/upload-sarif@v4.37.4
         with:
           sarif_file: ${{ runner.temp }}/sqruff.sarif
           category: sqruff
